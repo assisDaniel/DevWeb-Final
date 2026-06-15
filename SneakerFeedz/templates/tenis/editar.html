@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load lucide %}
+
+{% block title %}Editar tênis | SneakerFeedz{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-hero">
+        <div class="form-hero__top">
+            <div>
+                <h1 class="form-hero__title">Editar tênis</h1>
+                <p class="form-hero__text">Atualize o registro mantendo a mesma estrutura visual do catálogo.</p>
+            </div>
+            <a class="button button--secondary" href="../../">Voltar</a>
+        </div>
+
+        <div class="preview">
+            <div class="preview__media">
+                {% if object.foto %}
+                    <img src="{{ object.foto.url }}" alt="{{ object.nome }}">
+                {% else %}
+                    <div class="preview__placeholder">SneakerFeedz</div>
+                {% endif %}
+            </div>
+            <div class="preview__caption">
+                {% if object %}
+                    {{ object.get_marca_display }} · {{ object.nome }} · {{ object.ano_lancamento }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <form class="form-card" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="form-grid">
+            <div class="field">
+                <label for="{{ form.marca.id_for_label }}">Marca</label>
+                {{ form.marca }}
+                {% if form.marca.help_text %}<div class="field-help">{{ form.marca.help_text }}</div>{% endif %}
+                {% for error in form.marca.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.nome.id_for_label }}">Nome</label>
+                {{ form.nome }}
+                {% if form.nome.help_text %}<div class="field-help">{{ form.nome.help_text }}</div>{% endif %}
+                {% for error in form.nome.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field field--full">
+                <label for="{{ form.preco.id_for_label }}">Preço</label>
+                <div style="display: flex; gap: 12px;">
+                    {{ form.preco }}
+                </div>
+                {% if form.preco.help_text %}<div class="field-help">{{ form.preco.help_text }}</div>{% endif %}
+                {% for error in form.preco.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.tamanho.id_for_label }}">Tamanho</label>
+                {{ form.tamanho }}
+                {% if form.tamanho.help_text %}<div class="field-help">{{ form.tamanho.help_text }}</div>{% endif %}
+                {% for error in form.tamanho.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.categoria.id_for_label }}">Categoria</label>
+                {{ form.categoria }}
+                {% if form.categoria.help_text %}<div class="field-help">{{ form.categoria.help_text }}</div>{% endif %}
+                {% for error in form.categoria.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.ano_lancamento.id_for_label }}">Ano de lançamento</label>
+                {{ form.ano_lancamento }}
+                {% if form.ano_lancamento.help_text %}<div class="field-help">{{ form.ano_lancamento.help_text }}</div>{% endif %}
+                {% for error in form.ano_lancamento.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.foto.id_for_label }}">Foto</label>
+                {{ form.foto }}
+                {% if form.foto.help_text %}<div class="field-help">{{ form.foto.help_text }}</div>{% endif %}
+                {% for error in form.foto.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <a class="button button--secondary" href="../../">Cancelar</a>
+            <button class="button" type="submit">{% lucide 'save' %} Salvar alterações</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

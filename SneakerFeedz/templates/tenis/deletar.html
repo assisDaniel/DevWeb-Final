@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load lucide %}
+
+{% block title %}Excluir tênis | SneakerFeedz{% endblock %}
+
+{% block content %}
+<section class="delete-page">
+    <form class="delete-card" method="post">
+        {% csrf_token %}
+
+        <div class="delete-kicker">{% lucide 'triangle-alert' %} Confirmação</div>
+        <h1 class="delete-title">Excluir tênis</h1>
+        <p class="delete-text">
+            Esta ação remove o registro do catálogo. Se você continuar, o item deixará de aparecer na lista.
+        </p>
+
+        <div class="delete-summary">
+            <span class="delete-summary__label">Registro selecionado</span>
+            <h2 class="delete-summary__name">{{ object.get_marca_display }} · {{ object.nome }} · {{ object.preco }}</h2>
+            <div class="delete-summary__meta">
+                <span>{{ object.get_categoria_display }}</span>
+                <span>•</span>
+                <span>Tamanho {{ object.get_tamanho_display }}</span>
+                <span>•</span>
+                <span>{{ object.ano_lancamento }}</span>
+            </div>
+        </div>
+
+        <div class="delete-actions">
+            <a class="button button--secondary" href="../../">Cancelar</a>
+            <button class="button" type="submit">{% lucide 'trash-2' %} Confirmar exclusão</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

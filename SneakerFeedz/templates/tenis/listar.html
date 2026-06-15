@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load lucide %}
+
+{% block title %}Tênis | SneakerFeedz{% endblock %}
+
+{% block content %}
+<section class="listing-hero">
+    <div>
+        <h1 class="listing-hero__title">Tênis</h1>
+        <p class="listing-hero__text">
+            Um catálogo enxuto, com visual editorial, para organizar marca, nome, tamanho, categoria e lançamento.
+        </p>
+    </div>
+</section>
+
+<div class="listing-toolbar">
+    <form class="search-form" method="get" action="">
+        <input type="search" name="pesquisa" placeholder="Buscar por nome ou ano" value="{{ request.GET.pesquisa|default_if_none:'' }}">
+        <button class="button button--secondary" type="submit">Buscar</button>
+    </form>
+
+    <div class="listing-actions">
+        <a class="button" href="criar/">{% lucide 'plus' %} Novo tênis</a>
+    </div>
+</div>
+
+{% if tenis %}
+    <section class="sneaker-grid">
+        {% for item in tenis %}
+            <article class="sneaker-card">
+                <div class="sneaker-card__media">
+                    {% if item.foto %}
+                        <img src="{{ item.foto.url }}" alt="{{ item.nome }}">
+                    {% else %}
+                        <div class="sneaker-card__placeholder">SneakerFeedz</div>
+                    {% endif %}
+                </div>
+
+                <div class="sneaker-card__body">
+                    <span class="sneaker-card__brand">{{ item.get_marca_display }}</span>
+                    <h2 class="sneaker-card__name">{{ item.nome }}</h2>
+                    <h2 class="sneaker-card__name">{{ item.preco }}</h2>
+                    <div class="sneaker-card__details">
+                        <span class="sneaker-card__detail">{{ item.get_categoria_display }}</span>
+                        <span class="sneaker-card__detail">Tamanho {{ item.get_tamanho_display }}</span>
+                        <span class="sneaker-card__detail">{{ item.ano_lancamento }}</span>
+                    </div>
+                </div>
+
+                <div class="sneaker-card__footer">
+                    <a class="button button--secondary" href="editar/{{ item.pk }}/" aria-label="Editar {{ item.nome }}">{% lucide 'pencil' %} Editar</a>
+                    <a class="button" href="deletar/{{ item.pk }}/" aria-label="Deletar {{ item.nome }}">{% lucide 'trash-2' %} Excluir</a>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+{% else %}
+    <section class="empty-state">
+        <div>
+            <h2 class="empty-state__title">Nenhum tênis cadastrado ainda.</h2>
+            <p class="empty-state__text">Crie o primeiro registro para começar a montar o catálogo.</p>
+        </div>
+        <a class="button" href="criar/">{% lucide 'plus' %} Cadastrar tênis</a>
+    </section>
+{% endif %}
+{% endblock %}
