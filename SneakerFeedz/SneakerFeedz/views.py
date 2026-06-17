@@ -1,10 +1,14 @@
 from django.views.generic import View
+from rest_framework.views import APIView
 from .settings import LOGIN_URL
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class Login(View):
     def get(self, request):
@@ -52,3 +56,11 @@ class LoginAPI(ObtainAuthToken):
             'email': user.email,
             'token': token.key
         })
+    
+class LogoutAPI(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

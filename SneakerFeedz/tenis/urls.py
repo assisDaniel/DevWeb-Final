@@ -19,10 +19,16 @@ from tenis.views import *
 
 urlpatterns = [
     path('api/listar/', APIListarTenis.as_view(), name='api-listar-tenis'),
-
+    path('api/detalhar/<int:id>/', APIDetalharTenis.as_view(), name='api-detalhar-tenis'),
+    path('api/criar/', APICriarTenis.as_view(), name='api-criar-tenis'),
+    path('api/editar/<int:pk>/', APIEditarTenis.as_view(), name='api-editar-tenis'),
+    path('api/deletar/<int:pk>/', APIDeletarTenis.as_view(), name='api-deletar-tenis'),
+    
     path('', ListarTenis.as_view(), name='listar-tenis'),
     path('criar/', CriarTenis.as_view(), name='criar-tenis'),
     path('editar/<int:pk>/', EditarTenis.as_view(), name='editar-tenis'),
     path('deletar/<int:pk>/', DeletarTenis.as_view(), name='deletar-tenis'),
     path('fotos/<str:arquivo>/', FotoTenis.as_view(), name='foto-tenis'),
+    
+    
 ]

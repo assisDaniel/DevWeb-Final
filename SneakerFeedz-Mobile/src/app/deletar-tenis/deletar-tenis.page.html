@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Deletar Tênis</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div style="text-align: center; padding: 32px 16px;">
+    <img [src]="tenis.foto" [alt]="tenis.nome" style="width: 180px; height: 180px; object-fit: contain; border-radius: 12px;" />
+    
+    <h2>{{ getNomeMarca(tenis.marca) }} {{ tenis.nome }}</h2>
+    <p>{{ getNomeCategoria(tenis.categoria) }}</p>
+    <p><strong>{{ tenis.preco }}</strong></p>
+
+    <div style="margin-top: 16px;">
+      <svg lucideTriangleAlert></svg>
+      <p>Tem certeza que deseja deletar este tênis? Essa ação não pode ser desfeita.</p>
+    </div>
+  </div>
+
+  <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+    <ion-button expand="block" color="danger" (click)="deletar()">Confirmar</ion-button>
+    <ion-button expand="block" color="light" (click)="controle_navegacao.back()">Cancelar</ion-button>
+  </div>
+
+</ion-content>

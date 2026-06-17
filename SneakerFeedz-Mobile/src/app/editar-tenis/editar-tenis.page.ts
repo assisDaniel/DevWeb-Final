@@ -20,11 +20,12 @@ import {
 import { CapacitorHttp, HttpOptions, HttpResponse } from '@capacitor/core';
 import { Storage } from '@ionic/storage-angular';
 import { Usuario } from '../login/usuario.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-editar-tenis',
+  templateUrl: 'editar-tenis.page.html',
+  styleUrls: ['editar-tenis.page.scss'],
   imports: [
     CommonModule,
     FormsModule,
@@ -41,8 +42,9 @@ import { Usuario } from '../login/usuario.model';
   ],
   providers: [Storage]
 })
-export class Tab2Page {
+export class EditarTenisPage {
   public usuario: Usuario = new Usuario();
+  public id: number = 0;
 
   public marcas = [
     { id: 1, nome: 'Nike' },
@@ -67,13 +69,13 @@ export class Tab2Page {
   public moedas = ['BRL', 'USD'];
 
   public form = {
-    marca: null,
+    marca: null as number | null,
     nome: '',
-    preco: null,
+    preco: null as number | null,
     preco_currency: 'BRL',
-    tamanho: null,
-    categoria: null,
-    ano_lancamento: null,
+    tamanho: null as number | null,
+    categoria: null as number | null,
+    ano_lancamento: null as number | null,
     foto: null as File | null,
   };
 
@@ -83,6 +85,7 @@ export class Tab2Page {
     public controle_navegacao: NavController,
     public controle_toast: ToastController,
     public controle_alerta: AlertController,
+    public route: ActivatedRoute,
   ) {}
 
   async ngOnInit() {
@@ -93,6 +96,43 @@ export class Tab2Page {
     } else {
       this.controle_navegacao.navigateRoot('');
     }
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    await this.carregarTenis();
+  }
+
+  async carregarTenis() {
+    const loading = await this.controle_carregamento.create({ message: 'Carregando...' });
+    await loading.present();
+
+    const options: HttpOptions = {
+      url: `http://127.0.0.1:8000/tenis/api/detalhar/${this.id}/`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.usuario.token}`
+      }
+    };
+
+    CapacitorHttp.get(options)
+      .then(async (resposta: HttpResponse) => {
+        loading.dismiss();
+        if (resposta.status == 200) {
+          const t = resposta.data;
+          this.form.marca = t.marca;
+          this.form.nome = t.nome;
+          this.form.preco = t.preco;
+          this.form.preco_currency = t.preco_currency;
+          this.form.tamanho = t.tamanho;
+          this.form.categoria = t.categoria;
+          this.form.ano_lancamento = t.ano_lancamento;
+        } else {
+          this.apresenta_mensagem(resposta.status);
+        }
+      })
+      .catch(async (erro: any) => {
+        loading.dismiss();
+        this.apresenta_mensagem(erro?.status);
+      });
   }
 
   onFotoSelecionada(event: any) {
@@ -116,27 +156,25 @@ export class Tab2Page {
     }
 
     const options: HttpOptions = {
-      url: 'http://127.0.0.1:8000/tenis/api/criar/',
+      url: `http://127.0.0.1:8000/tenis/api/editar/${this.id}/`,
       headers: {
-        'Content-Type': 'multipart/form-data',
         'Authorization': `Token ${this.usuario.token}`
       },
       data: formData
     };
 
-    CapacitorHttp.post(options)
+    CapacitorHttp.patch(options)
       .then(async (resposta: HttpResponse) => {
-        if (resposta.status == 201){
+        loading.dismiss();
+        if (resposta.status == 200) {
           const toast = await this.controle_toast.create({
-            message: 'Tênis cadastrado com sucesso!',
+            message: 'Tênis atualizado com sucesso!',
             duration: 2000,
             cssClass: 'ion-text-center'
           });
-          loading.dismiss();
           toast.present();
           this.controle_navegacao.navigateRoot('/tenis/home');
-        }else{
-          loading.dismiss();
+        } else {
           this.apresenta_mensagem(resposta.status);
         }
       })
@@ -148,7 +186,7 @@ export class Tab2Page {
 
   async apresenta_mensagem(codigo: number) {
     const mensagem = await this.controle_toast.create({
-      message: `Falha ao cadastrar tênis: código ${codigo}`,
+      message: `Falha ao editar tênis: código ${codigo}`,
       cssClass: 'ion-text-center',
       duration: 2000
     });

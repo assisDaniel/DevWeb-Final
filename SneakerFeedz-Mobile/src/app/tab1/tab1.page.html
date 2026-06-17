@@ -1,17 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Lista de Tênis</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <svg lucideLogOut></svg>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">SneakerFeedz</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list>
+    <ion-item *ngFor="let tenis of lista_tenis">
+      <ion-thumbnail slot="start">
+        <img [src]="tenis.foto" [alt]="tenis.nome" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ tenis.nome }}</h2>
+        <p>{{ tenis.nome_marca }} · {{ tenis.ano_lancamento }}</p>
+        <p>Tam: {{ tenis.tamanho }}</p>
+        <p><strong>{{ tenis.preco }}</strong></p>
+        <div>
+          <ion-button color="light" (click)="editar(tenis.id)">
+            <svg lucidePencil></svg>
+          </ion-button>
+          <ion-button color="light" (click)="deletar(tenis.id)">
+            <svg lucideTrash></svg>
+          </ion-button>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="lista_tenis.length === 0" style="text-align:center; margin-top: 2rem;">
+    <ion-icon name="sad" size="large"></ion-icon>
+    <p>Nenhum tênis encontrado.</p>
+  </div>
+
 </ion-content>

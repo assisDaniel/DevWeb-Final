@@ -25,4 +25,5 @@ urlpatterns = [
     path('tenis/', include("tenis.urls"), name='tenis'),
     
     path('api/login/', LoginAPI.as_view(), name='login-api'),
+    path('api/logout/', LogoutAPI.as_view(), name='logout-api'),
 ]

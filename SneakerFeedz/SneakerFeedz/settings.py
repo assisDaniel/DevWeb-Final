@@ -27,10 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
 ]
 
-CORS = [
-    'http://localhost:8101/',
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8100',
 ]
 
 

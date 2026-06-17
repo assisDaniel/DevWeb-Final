@@ -1,0 +1,15 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Usuário" type="text" placeholder="Seu usuário" [(ngModel)]="instancia.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" label="Senha" placeholder="Sua senha" [(ngModel)]="instancia.password">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="autenticarUsuario()">Entrar</ion-button>
+  </div>
+</ion-content>

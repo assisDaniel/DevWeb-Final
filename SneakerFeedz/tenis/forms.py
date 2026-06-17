@@ -11,7 +11,11 @@ class FormularioTenis(ModelForm):
             'marca': forms.Select(attrs={'class': 'form-select'}),
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'preco': MoneyWidget(
-                amount_widget=forms.NumberInput(attrs={'class': 'form-control'}),
+                amount_widget=forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'step': '0.01',
+                    'inputmode': 'decimal',
+                }),
                 currency_widget=forms.Select(attrs={'class': 'form-select'}, choices=[('BRL', 'BRL'), ('USD', 'USD')]),
             ),
             'ano_lancamento': forms.NumberInput(attrs={'class': 'form-control'}),
