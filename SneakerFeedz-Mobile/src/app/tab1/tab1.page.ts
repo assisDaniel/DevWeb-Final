@@ -5,11 +5,9 @@ import {
   AlertController,
   IonContent,
   IonHeader,
-  IonIcon,
   IonItem,
   IonLabel,
   IonList,
-  IonThumbnail,
   IonTitle,
   IonToolbar,
   LoadingController,
@@ -18,9 +16,6 @@ import {
   IonButton,
   IonButtons,
 } from '@ionic/angular/standalone';
-
-import { addIcons } from 'ionicons';
-import { sad } from 'ionicons/icons';
 
 import { Usuario } from '../login/usuario.model';
 import { Tenis } from './tenis.model';
@@ -39,9 +34,7 @@ import { Storage } from '@ionic/storage-angular';
     IonContent,
     IonList,
     IonItem,
-    IonThumbnail,
     IonLabel,
-    IonIcon,
     LucidePencil,
     LucideTrash,
     LucideLogOut,
@@ -59,9 +52,7 @@ export class Tab1Page {
       public controle_navegacao: NavController,
       public controle_alerta: AlertController,
       public controle_toast: ToastController,
-    ) {
-      addIcons({ sad });
-    }
+    ) {}
 
     async ngOnInit() {
       await this.storage.create();

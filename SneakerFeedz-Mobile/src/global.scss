@@ -35,3 +35,94 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+html,
+body {
+	background: var(--app-paper);
+	color: var(--app-ink);
+	font-family: Inter, Helvetica, Arial, sans-serif;
+}
+
+ion-app,
+ion-content {
+	background: var(--app-paper);
+	color: var(--app-ink);
+}
+
+ion-header,
+ion-toolbar {
+	--background: var(--app-paper);
+	--color: var(--app-ink);
+}
+
+ion-title {
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--app-ink);
+}
+
+ion-button {
+	--border-radius: 9999px;
+	--box-shadow: none;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+ion-button.button-solid {
+	--background: var(--app-ink);
+	--background-activated: var(--app-ink);
+	--background-hover: var(--app-ink);
+	--color: #0b0b0c;
+}
+
+ion-button.button-outline,
+ion-button.button-clear {
+	--border-color: var(--app-hairline-strong);
+	--color: var(--app-ink);
+}
+
+ion-button[color="danger"] {
+	--background: var(--app-sale);
+	--background-activated: var(--app-sale);
+	--background-hover: var(--app-sale);
+	--color: #ffffff;
+}
+
+ion-item {
+	--background: transparent;
+	--padding-start: 0;
+	--inner-padding-end: 0;
+}
+
+ion-input,
+ion-select,
+ion-searchbar {
+	--background: transparent;
+	--color: var(--app-ink);
+	--placeholder-color: var(--app-muted);
+	--highlight-color-focused: var(--app-ink);
+	--border-color: var(--app-hairline);
+}
+
+ion-tab-bar {
+	--background: #111114;
+	--border: 1px solid var(--app-hairline);
+	--color: var(--app-muted);
+	--color-selected: var(--app-ink);
+	background: #111114;
+	border-top: 1px solid var(--app-hairline);
+}
+
+ion-tab-button {
+	--color: var(--app-muted);
+	--color-selected: var(--app-ink);
+	color: var(--app-muted);
+}
+
+ion-tab-button ion-icon,
+ion-tab-button ion-label {
+	color: inherit;
+	fill: currentColor;
+}

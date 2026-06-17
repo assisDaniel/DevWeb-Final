@@ -1,0 +1,139 @@
+.delete-shell {
+	padding: 20px 16px 28px;
+	display: grid;
+	gap: 20px;
+}
+
+.delete-intro h1 {
+	margin: 0;
+	font-size: clamp(2rem, 7vw, 3.6rem);
+	line-height: 0.95;
+	text-transform: uppercase;
+	letter-spacing: -0.04em;
+	max-width: 13ch;
+	color: #f5f5f5;
+}
+
+.delete-intro p {
+	color: var(--app-muted);
+	margin: 12px 0 0;
+	max-width: 34rem;
+	line-height: 1.5;
+}
+
+.eyebrow {
+	margin: 0 0 10px;
+	color: var(--app-sale);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+
+.delete-card {
+	border: 1px solid var(--app-hairline);
+	background: #151517;
+	display: grid;
+	gap: 0;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+}
+
+.delete-media {
+	background: #111114;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+}
+
+.delete-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.delete-meta {
+	padding: 16px;
+	display: grid;
+	gap: 8px;
+}
+
+.brand-line,
+.details-line {
+	margin: 0;
+	color: #c8c8cd;
+	font-size: 0.8rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.delete-meta h2 {
+	margin: 0;
+	font-size: 1.5rem;
+	line-height: 1;
+	letter-spacing: -0.03em;
+	text-transform: uppercase;
+	color: #f5f5f5;
+}
+
+.price-line {
+	margin: 0;
+	color: var(--app-sale);
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.warning-box {
+	margin: 0 16px;
+	padding: 14px 0 0;
+	border-top: 1px solid var(--app-hairline);
+	display: grid;
+	gap: 12px;
+}
+
+.warning-box svg {
+	width: 24px;
+	height: 24px;
+	color: var(--app-sale);
+}
+
+.warning-box p {
+	margin: 0;
+	color: #f5f5f5;
+	line-height: 1.5;
+}
+
+.action-row {
+	padding: 16px;
+	display: grid;
+	gap: 10px;
+}
+
+.action-row ion-button {
+	height: 48px;
+}
+
+@media (min-width: 768px) {
+	.delete-shell {
+		padding: 28px 24px 36px;
+	}
+
+	.delete-card {
+		grid-template-columns: 1fr minmax(0, 1fr);
+		align-items: stretch;
+	}
+
+	.delete-media {
+		min-height: 100%;
+	}
+
+	.delete-meta,
+	.warning-box,
+	.action-row {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.warning-box {
+		margin: 0 20px;
+	}
+}

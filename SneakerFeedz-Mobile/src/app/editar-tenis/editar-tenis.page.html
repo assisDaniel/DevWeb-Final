@@ -5,53 +5,62 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <section class="form-shell">
+    <div class="form-intro">
+      <p class="eyebrow">Edição</p>
+      <h1>Ajuste os detalhes do modelo sem perder a clareza visual.</h1>
+      <p>O cadastro atual fica em destaque para facilitar correções rápidas e seguras.</p>
+    </div>
 
-  <ion-item>
-    <ion-label position="stacked">Marca</ion-label>
-    <ion-select [(ngModel)]="form.marca" placeholder="---------">
-      <ion-select-option *ngFor="let m of marcas" [value]="m.id">{{ m.nome }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <div class="form-card">
+      <ion-item class="field-row">
+        <ion-label position="stacked">Marca</ion-label>
+        <ion-select [(ngModel)]="form.marca" placeholder="---------">
+          <ion-select-option *ngFor="let m of marcas" [value]="m.id">{{ m.nome }}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Nome</ion-label>
-    <ion-input [(ngModel)]="form.nome" type="text"></ion-input>
-  </ion-item>
+      <ion-item class="field-row">
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input [(ngModel)]="form.nome" type="text"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Preço</ion-label>
-    <ion-select [(ngModel)]="form.preco_currency" slot="start">
-      <ion-select-option *ngFor="let m of moedas" [value]="m">{{ m }}</ion-select-option>
-    </ion-select>
-    <ion-input [(ngModel)]="form.preco" type="number"></ion-input>
-  </ion-item>
+      <ion-item class="field-row price-row">
+        <ion-label position="stacked">Preço</ion-label>
+        <ion-select [(ngModel)]="form.preco_currency" slot="start">
+          <ion-select-option *ngFor="let m of moedas" [value]="m">{{ m }}</ion-select-option>
+        </ion-select>
+        <ion-input [(ngModel)]="form.preco" type="number"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Tamanho</ion-label>
-    <ion-select [(ngModel)]="form.tamanho" placeholder="---------">
-      <ion-select-option *ngFor="let t of tamanhos" [value]="t">{{ t }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item class="field-row">
+        <ion-label position="stacked">Tamanho</ion-label>
+        <ion-select [(ngModel)]="form.tamanho" placeholder="---------">
+          <ion-select-option *ngFor="let t of tamanhos" [value]="t">{{ t }}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Categoria</ion-label>
-    <ion-select [(ngModel)]="form.categoria" placeholder="---------">
-      <ion-select-option *ngFor="let c of categorias" [value]="c.id">{{ c.nome }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item class="field-row">
+        <ion-label position="stacked">Categoria</ion-label>
+        <ion-select [(ngModel)]="form.categoria" placeholder="---------">
+          <ion-select-option *ngFor="let c of categorias" [value]="c.id">{{ c.nome }}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Ano de lançamento</ion-label>
-    <ion-input [(ngModel)]="form.ano_lancamento" type="number"></ion-input>
-  </ion-item>
+      <ion-item class="field-row">
+        <ion-label position="stacked">Ano de lançamento</ion-label>
+        <ion-input [(ngModel)]="form.ano_lancamento" type="number"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Foto</ion-label>
-    <input type="file" accept="image/*" (change)="onFotoSelecionada($event)" style="margin-top: 8px;" />
-  </ion-item>
+      <ion-item class="field-row file-row">
+        <ion-label position="stacked">Foto</ion-label>
+        <input type="file" accept="image/*" (change)="onFotoSelecionada($event)" />
+      </ion-item>
 
-  <div style="padding: 16px;">
-    <ion-button expand="block" (click)="salvar()">Salvar</ion-button>
-  </div>
+      <div class="cta-row">
+        <ion-button expand="block" (click)="salvar()">Salvar alterações</ion-button>
+      </div>
+    </div>
+  </section>
 
 </ion-content>

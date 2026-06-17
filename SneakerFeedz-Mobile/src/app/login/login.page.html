@@ -1,15 +1,24 @@
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <ion-list>
-      <ion-item>
-        <ion-input label="Usuário" type="text" placeholder="Seu usuário" [(ngModel)]="instancia.username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="password" label="Senha" placeholder="Sua senha" [(ngModel)]="instancia.password">
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button (click)="autenticarUsuario()">Entrar</ion-button>
+  <div class="login-shell">
+    <section class="login-hero">
+      <p class="eyebrow">SneakerFeedz</p>
+      <h1>Entre para gerenciar seus tênis.</h1>
+      <p class="supporting-copy">Uma interface limpa, contrastada e direta para listar, criar, editar e remover cadastros.</p>
+    </section>
+
+    <section class="login-card">
+      <ion-list lines="none">
+        <ion-item class="field-row">
+          <ion-input label="Usuário" labelPlacement="stacked" type="text" placeholder="Seu usuário" [(ngModel)]="instancia.username"></ion-input>
+        </ion-item>
+        <ion-item class="field-row">
+          <ion-input type="password" label="Senha" labelPlacement="stacked" placeholder="Sua senha" [(ngModel)]="instancia.password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" (click)="autenticarUsuario()">Entrar</ion-button>
+    </section>
   </div>
 </ion-content>

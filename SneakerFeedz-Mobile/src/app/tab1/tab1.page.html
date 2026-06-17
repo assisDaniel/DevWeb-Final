@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Lista de Tênis</ion-title>
+    <ion-title>SneakerFeedz</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">
+      <ion-button fill="clear" (click)="logout()">
         <svg lucideLogOut></svg>
       </ion-button>
     </ion-buttons>
@@ -12,35 +12,47 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">SneakerFeedz</ion-title>
+      <ion-title size="large">Lista de Tênis</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item *ngFor="let tenis of lista_tenis">
-      <ion-thumbnail slot="start">
-        <img [src]="tenis.foto" [alt]="tenis.nome" />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ tenis.nome }}</h2>
-        <p>{{ tenis.nome_marca }} · {{ tenis.ano_lancamento }}</p>
-        <p>Tam: {{ tenis.tamanho }}</p>
-        <p><strong>{{ tenis.preco }}</strong></p>
-        <div>
-          <ion-button color="light" (click)="editar(tenis.id)">
-            <svg lucidePencil></svg>
-          </ion-button>
-          <ion-button color="light" (click)="deletar(tenis.id)">
-            <svg lucideTrash></svg>
-          </ion-button>
-        </div>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <section class="page-shell">
+    <div class="page-intro">
+      <p class="eyebrow">Catálogo</p>
+      <h1>Controle seus modelos com uma leitura rápida e editorial.</h1>
+      <p>Cards planos, contraste forte e ações diretas para editar ou remover cada tênis.</p>
+    </div>
 
-  <div *ngIf="lista_tenis.length === 0" style="text-align:center; margin-top: 2rem;">
-    <ion-icon name="sad" size="large"></ion-icon>
-    <p>Nenhum tênis encontrado.</p>
-  </div>
+    <ion-list class="tenis-grid" lines="none">
+      <ion-item class="tenis-card" *ngFor="let tenis of lista_tenis">
+        <div class="tenis-media">
+          <img [src]="tenis.foto" [alt]="tenis.nome" />
+        </div>
+
+        <ion-label class="tenis-meta">
+          <span class="brand-line">{{ tenis.nome_marca }} · {{ tenis.ano_lancamento }}</span>
+          <h2>{{ tenis.nome }}</h2>
+          <p class="details-line">Tam {{ tenis.tamanho }}</p>
+          <p class="price-line">{{ tenis.preco }}</p>
+
+          <div class="action-row">
+            <ion-button fill="solid" (click)="editar(tenis.id)">
+              <svg lucidePencil></svg>
+              <span>Editar</span>
+            </ion-button>
+            <ion-button fill="outline" (click)="deletar(tenis.id)">
+              <svg lucideTrash></svg>
+              <span>Excluir</span>
+            </ion-button>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="lista_tenis.length === 0" class="empty-state">
+      <p class="empty-title">Nenhum tênis encontrado.</p>
+      <p class="empty-copy">Quando houver itens cadastrados, eles aparecem aqui em um grid de alto contraste.</p>
+    </div>
+  </section>
 
 </ion-content>

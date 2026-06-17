@@ -1,1 +1,30 @@
+ion-tabs {
+	background: var(--app-paper);
+}
+
+ion-tab-bar {
+	height: 64px;
+	padding: 8px 12px calc(env(safe-area-inset-bottom) + 8px);
+}
+
+ion-tab-button {
+	--ripple-color: rgba(255, 255, 255, 0.08);
+	gap: 4px;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+ion-tab-button svg {
+	width: 18px;
+	height: 18px;
+	stroke: currentColor;
+	fill: none;
+}
+
+ion-tab-button[aria-selected='true'] {
+	background: rgba(255, 255, 255, 0.04);
+	border-radius: 9999px;
+}
 
